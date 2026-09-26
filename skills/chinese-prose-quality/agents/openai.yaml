@@ -1,0 +1,6 @@
+interface:
+  display_name: "中文写作与逐句校审"
+  short_description: "检查中文写作的病句、搭配、指代、逻辑和标点，保留原意与文体"
+  default_prompt: "请使用 $chinese-prose-quality 完成中文写作或修订，并对全文进行逐句校审和修改后复核。"
+policy:
+  allow_implicit_invocation: true
