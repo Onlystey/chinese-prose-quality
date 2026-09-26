@@ -1,0 +1,772 @@
+{
+  "schema_version": "1.0",
+  "title": "原创病句迁移与防误报测试",
+  "source_scope": "现代汉语病句与标点详解，印刷170—283页；题库规则经独立语义核查后迁移",
+  "authorship": "全部完整测试句由本任务独立构造；不复刻原书题库，不含私人原稿。常见语法格式和术语不可避免相同。",
+  "labels": {
+    "repair": "有明确缺陷；指出关系并修订。信息不足时可给修订方向，不得补造事实。",
+    "keep": "该语境可成立；不得为凑修改而制造错误。",
+    "context": "缺少关键事实、指代或证据，保留不确定性并说明所缺信息。"
+  },
+  "evaluation": "one_possible_revision仅为一个参考，不能按字符串完全相等评分。评价语义诊断、命题保真、事实边界和防误报。未运行模型评测，不声称通过率。",
+  "cases": [
+    {
+      "id": "EX-001",
+      "rule": "EX01",
+      "text": "这份培训计划的最终目标是一名能够独立授课的教师。",
+      "expected_label": "repair",
+      "diagnostic_reason": "目标与人混同；实际目标应是培养结果。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "这份培训计划的最终目标是培养能够独立授课的教师。"
+    },
+    {
+      "id": "EX-002",
+      "rule": "EX02",
+      "text": "学校培养的教学能力在比赛中获得了一等奖。",
+      "expected_label": "repair",
+      "diagnostic_reason": "能力不是获奖主体；上下文已明确获奖者。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "学校培养的参赛学员在比赛中获得了一等奖。",
+      "context": "前句说明参赛学员获奖。"
+    },
+    {
+      "id": "EX-003",
+      "rule": "EX03",
+      "text": "研究员整理了全部录音，随后被存入加密硬盘。",
+      "expected_label": "repair",
+      "diagnostic_reason": "后分句受事是录音，不是研究员。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "研究员整理了全部录音，随后将录音存入加密硬盘。"
+    },
+    {
+      "id": "EX-004",
+      "rule": "EX03",
+      "text": "研究员整理了全部录音，随后写下了分析提纲。",
+      "expected_label": "keep",
+      "diagnostic_reason": "共同主语可自然承前省略。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "给每个分句机械重复主语"
+      ]
+    },
+    {
+      "id": "EX-005",
+      "rule": "EX04",
+      "text": "这篇稿子，我昨天已经读过了。",
+      "expected_label": "keep",
+      "diagnostic_reason": "话题先行、后接主谓说明合法。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "因话题不是后句主语而判错"
+      ]
+    },
+    {
+      "id": "EX-006",
+      "rule": "EX05",
+      "text": "通过逐段核对，使我们发现了两处引文遗漏。",
+      "expected_label": "repair",
+      "diagnostic_reason": "两套结构叠用，应保留明确的主干。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "通过逐段核对，我们发现了两处引文遗漏。"
+    },
+    {
+      "id": "EX-007",
+      "rule": "EX05",
+      "text": "通过逐段核对，我们发现了两处引文遗漏。",
+      "expected_label": "keep",
+      "diagnostic_reason": "介词短语后有明确主语和谓语。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "因句首通过而删改"
+      ]
+    },
+    {
+      "id": "EX-008",
+      "rule": "EX06",
+      "text": "这组活动能够解释概念和提高学生。",
+      "expected_label": "repair",
+      "diagnostic_reason": "提高学生缺少可提高的具体属性。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "这组活动能够帮助学生理解概念，并提高他们运用概念的能力。",
+      "context": "活动既含概念讲解，又含概念运用练习。"
+    },
+    {
+      "id": "EX-009",
+      "rule": "EX06",
+      "text": "教师需要讲解概念，并指导学生运用概念分析作品。",
+      "expected_label": "keep",
+      "diagnostic_reason": "两个动词各有适当对象。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "EX-010",
+      "rule": "EX07",
+      "text": "实验室展示了上周出土的一件两千年前的陶器。",
+      "expected_label": "keep",
+      "diagnostic_reason": "出土时间与器物年代分别明确。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "把上周移到两千年前之后造成时间混乱"
+      ]
+    },
+    {
+      "id": "EX-011",
+      "rule": "EX07",
+      "text": "实验室展示了两千年前上周出土的一件陶器。",
+      "expected_label": "repair",
+      "diagnostic_reason": "两千年前与上周共同挤占出土时间，须恢复年代对象。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "实验室展示了上周出土的一件两千年前的陶器。"
+    },
+    {
+      "id": "EX-012",
+      "rule": "EX08",
+      "text": "四个研究助理的访谈记录被误删了。",
+      "expected_label": "context",
+      "diagnostic_reason": "四个可能限制人，也可能限制记录；事实后果不同。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "擅定四名助理或四份记录"
+      ],
+      "context": "没有其他信息能确定被删记录数或涉及助理数。"
+    },
+    {
+      "id": "EX-013",
+      "rule": "EX08",
+      "text": "四名研究助理的访谈记录被误删了。",
+      "expected_label": "keep",
+      "diagnostic_reason": "名明确限制研究助理；记录总数未陈述。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "凭四名推断记录仅四份"
+      ]
+    },
+    {
+      "id": "EX-014",
+      "rule": "EX09",
+      "text": "学院决定取消学生只能在本系选课。",
+      "expected_label": "repair",
+      "diagnostic_reason": "取消的对象是限制，中心词遗漏。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "学院决定取消学生只能在本系选课的限制。"
+    },
+    {
+      "id": "EX-015",
+      "rule": "EX09",
+      "text": "她经历了从独立备课到共同备课。",
+      "expected_label": "repair",
+      "diagnostic_reason": "经历需要完整过程宾语。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "她经历了从独立备课到共同备课的转变。"
+    },
+    {
+      "id": "EX-016",
+      "rule": "EX10",
+      "text": "问卷将受访者分为本科生、研究生和大学生三类，并分别计算人数。",
+      "expected_label": "repair",
+      "diagnostic_reason": "大学生包含前两类；互斥加总场景分类重叠。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "自行补入未提供的第三类"
+      ],
+      "context": "要求三类互不重叠，但未提供完整分类标准。"
+    },
+    {
+      "id": "EX-017",
+      "rule": "EX11",
+      "text": "本次公开讲座欢迎教师和家长参加。",
+      "expected_label": "keep",
+      "diagnostic_reason": "参与者可有身份交集，不是互斥统计。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "因教师也可能是家长而判并列错误"
+      ]
+    },
+    {
+      "id": "EX-018",
+      "rule": "EX11",
+      "text": "青少年学生需要充足的睡眠。",
+      "expected_label": "keep",
+      "diagnostic_reason": "青少年修饰学生，不是两个名词并列。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "判为交叉概念并列"
+      ]
+    },
+    {
+      "id": "EX-019",
+      "rule": "EX12",
+      "text": "她听见远处的钟声，又看见塔顶缓缓转动的指针。",
+      "expected_label": "keep",
+      "diagnostic_reason": "听觉与视觉对象分别匹配。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "EX-020",
+      "rule": "EX12",
+      "text": "她看见钟声越过山谷，落在昏暗的屋檐上。",
+      "expected_label": "keep",
+      "diagnostic_reason": "小说语境可形成可理解的通感意象。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "按事实观察记录标准机械删除通感"
+      ],
+      "context": "这是小说中人物半梦半醒的感受，不是实地观察报告。"
+    },
+    {
+      "id": "EX-021",
+      "rule": "EX13",
+      "text": "延误的主要原因是由于录音设备损坏造成的。",
+      "expected_label": "repair",
+      "diagnostic_reason": "原因是、由于、造成的三种框架混杂。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "延误的主要原因是录音设备损坏。"
+    },
+    {
+      "id": "EX-022",
+      "rule": "EX13",
+      "text": "根据研究记录显示，两组完成任务的时间不同。",
+      "expected_label": "repair",
+      "diagnostic_reason": "根据记录与记录显示两套框架混用。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "研究记录显示，两组完成任务的时间不同。"
+    },
+    {
+      "id": "EX-023",
+      "rule": "EX14",
+      "text": "设计者提出的方案，随后修改了三处参数。",
+      "expected_label": "repair",
+      "diagnostic_reason": "语境中修改者是设计者；的使方案成为主语。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "设计者提出方案后，又修改了其中的三处参数。",
+      "context": "说明设计者的两步行动，不拟用方案拟人。"
+    },
+    {
+      "id": "EX-024",
+      "rule": "EX14",
+      "text": "设计者提出的方案，随后由审查组修改了三处参数。",
+      "expected_label": "keep",
+      "diagnostic_reason": "话题方案的受事关系与由审查组明确，不必换了。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "EX-025",
+      "rule": "EX15",
+      "text": "道路已经封闭，但是车辆无法通行。",
+      "expected_label": "repair",
+      "diagnostic_reason": "既定上下文中是因果，无转折。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "道路已经封闭，因此车辆无法通行。",
+      "context": "没有备用车道或其他可通行预期。"
+    },
+    {
+      "id": "EX-026",
+      "rule": "EX15",
+      "text": "道路已经封闭，但是救护车仍可从专用通道通行。",
+      "expected_label": "keep",
+      "diagnostic_reason": "封闭与特许通行形成真实转折。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": []
+    },
+    {
+      "id": "EX-027",
+      "rule": "EX16",
+      "text": "观众不仅理解了台词，演员也根据现场反应调整了语速。",
+      "expected_label": "repair",
+      "diagnostic_reason": "后分句另有主语，连接词应统领两个分句。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "不仅观众理解了台词，演员也根据现场反应调整了语速。",
+      "context": "作者确实要以并列递进结构同时陈述两方面的现场变化。"
+    },
+    {
+      "id": "EX-028",
+      "rule": "EX17",
+      "text": "先提交最终版本，再根据审稿意见修改，最后才能收到审稿意见。",
+      "expected_label": "repair",
+      "diagnostic_reason": "流程时间自相矛盾；意见应先收到才能据之修改。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "先提交送审版本，收到审稿意见后再修改，最后提交最终版本。",
+      "context": "描述一轮正常审稿流程，最终版本指完成该轮修改后的版本。"
+    },
+    {
+      "id": "EX-029",
+      "rule": "EX18",
+      "text": "管理员提醒大家，切忌不要遗漏文件来源。",
+      "expected_label": "repair",
+      "diagnostic_reason": "切忌与不要叠用使禁令反向。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "管理员提醒大家，切记不要遗漏文件来源。"
+    },
+    {
+      "id": "EX-030",
+      "rule": "EX18",
+      "text": "没有人不关心这次评审的结果。",
+      "expected_label": "keep",
+      "diagnostic_reason": "双重否定合法，表示人人关心。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "见到两个不字就判错"
+      ]
+    },
+    {
+      "id": "EX-031",
+      "rule": "EX18",
+      "text": "必须防止工作人员不经核验就发布数据。",
+      "expected_label": "keep",
+      "diagnostic_reason": "防止支配的是不经核验就发布这一行为，不是防止与不简单抵消。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "机械删除不经核验中的不"
+      ]
+    },
+    {
+      "id": "EX-032",
+      "rule": "EX19",
+      "text": "项目能否持续开展，取决于经费来源的稳定性。",
+      "expected_label": "keep",
+      "diagnostic_reason": "稳定性包含程度差异，语义对应。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "给后半句机械添加能否"
+      ]
+    },
+    {
+      "id": "EX-033",
+      "rule": "EX19",
+      "text": "学习态度的好坏是顺利毕业的充分保证。",
+      "expected_label": "repair",
+      "diagnostic_reason": "好与坏都被当作成功充分保证，不成立。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "良好的学习态度有助于顺利完成学业。",
+      "context": "没有材料支持充分保证；允许将因果强度调至证据所及。"
+    },
+    {
+      "id": "EX-034",
+      "rule": "EX21",
+      "text": "她交回了借书证，又把雨伞靠在门边。这张证件明天就到期。",
+      "expected_label": "keep",
+      "diagnostic_reason": "张和证件将指代唯一限定为借书证。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "仅因前文有两个名词就判指代不明"
+      ]
+    },
+    {
+      "id": "EX-035",
+      "rule": "EX21",
+      "text": "小周把方案交给小林后，他又修改了三处。",
+      "expected_label": "context",
+      "diagnostic_reason": "他可指两人，修改者未确定。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "擅定修改者"
+      ],
+      "context": "没有紧邻上下文能排除任何一人。"
+    },
+    {
+      "id": "EX-036",
+      "rule": "EX22",
+      "text": "为了让这项措施受惠于居民，社区增加了咨询窗口。",
+      "expected_label": "repair",
+      "diagnostic_reason": "受益者应是居民。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "为了让居民从这项措施中受益，社区增加了咨询窗口。"
+    },
+    {
+      "id": "EX-037",
+      "rule": "EX23",
+      "text": "平均等待时间从12分钟减为9分钟，下降了3%。",
+      "expected_label": "repair",
+      "diagnostic_reason": "绝对减少3分钟，相对减少25%。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "平均等待时间从12分钟减为9分钟，减少了3分钟，降幅为25%。"
+    },
+    {
+      "id": "EX-038",
+      "rule": "EX23",
+      "text": "缺席率从40%降至30%，下降了10个百分点。",
+      "expected_label": "keep",
+      "diagnostic_reason": "百分点计算正确。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "改为下降10%"
+      ]
+    },
+    {
+      "id": "EX-039",
+      "rule": "EX24",
+      "text": "每个班级的平均年龄都低于十二岁。",
+      "expected_label": "keep",
+      "diagnostic_reason": "每班分别是一个群体，平均数对象合理。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "把每个与平均共现一概判错"
+      ]
+    },
+    {
+      "id": "EX-040",
+      "rule": "EX24",
+      "text": "这所学校每名学生的平均年龄为十二岁。",
+      "expected_label": "repair",
+      "diagnostic_reason": "个体一般无群体平均年龄；原意为全校均龄。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [],
+      "one_possible_revision": "这所学校学生的平均年龄为十二岁。",
+      "context": "统计的是某一时点全校学生年龄，不是个人跨时点均龄。"
+    },
+    {
+      "id": "EX-041",
+      "rule": "EX25",
+      "text": "研究者尚未区分两种反馈方式的效果。",
+      "expected_label": "keep",
+      "diagnostic_reason": "未完成区分不等于没有区分能力。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "改成研究者不具备区分能力"
+      ]
+    },
+    {
+      "id": "EX-042",
+      "rule": "EX27",
+      "text": "教研讨论对她产生了潜移默化的影响。",
+      "expected_label": "keep",
+      "diagnostic_reason": "潜移默化的影响可以成立，不强制改成状语。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "仅依据词性模板判错"
+      ]
+    },
+    {
+      "id": "EX-043",
+      "rule": "EX28",
+      "text": "这项处理能够永久治愈所有慢性病。",
+      "expected_label": "context",
+      "diagnostic_reason": "句法基本可通；高风险全称疗效陈述缺证据，不能认证为事实。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "以语句通顺证明医疗主张真实",
+        "编造支持来源"
+      ],
+      "context": "没有附任何研究证据，任务要求同时检查事实可靠性。"
+    },
+    {
+      "id": "EX-044",
+      "rule": "EX29",
+      "text": "她先把借来的钥匙还给管理员，随后从口袋里掏出同一把钥匙开了门。",
+      "expected_label": "repair",
+      "diagnostic_reason": "同一物件状态连续性冲突；不能仅润色动词。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "擅自增加另一把钥匙",
+        "擅自声称又借回"
+      ],
+      "context": "后文需要她开门，但没有重新取得钥匙的情节。"
+    },
+    {
+      "id": "EX-045",
+      "rule": "EX26",
+      "text": "请您有空时指点这份提纲。",
+      "expected_label": "keep",
+      "diagnostic_reason": "礼貌程度适当，不能因上下级关系未知而判错。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "未经关系信息认定谦卑失当"
+      ]
+    },
+    {
+      "id": "EX-046",
+      "rule": "EX27",
+      "text": "“等一下，再等一下。”他盯着还没有亮起的屏幕。",
+      "expected_label": "keep",
+      "diagnostic_reason": "对白重复表现等待和情绪，有明确修辞作用。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "机械合并成一次等一下"
+      ]
+    },
+    {
+      "id": "EX-047",
+      "rule": "EX30",
+      "text": "会议拟在六月中旬前后举行，具体日期另行通知。",
+      "expected_label": "keep",
+      "diagnostic_reason": "有意给出约略时段，未与精确日期相冲突。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "一概认为中旬前后是三个时间而病"
+      ]
+    },
+    {
+      "id": "EX-048",
+      "rule": "EX09",
+      "text": "报告强调应提升教师的。",
+      "expected_label": "context",
+      "diagnostic_reason": "句子缺少中心词，但材料未说明提升何种品质。",
+      "must_preserve": [
+        "原意",
+        "事实条件",
+        "数量关系",
+        "文体"
+      ],
+      "must_not": [
+        "擅补教学能力或师德水平"
+      ],
+      "context": "输入在的字处结束，可能为材料截断。"
+    }
+  ]
+}

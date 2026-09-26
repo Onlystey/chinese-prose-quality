@@ -1,0 +1,512 @@
+{
+  "version": 1,
+  "origin": "原创语法与反误报案例；不复制书中题目",
+  "purpose": "评估修订行为、保意与拒绝过度纠错，不是确定性语法自动判决器",
+  "labels": {
+    "fix": "原意充分明确且应修正",
+    "keep": "不应判为病句或无端改写",
+    "review": "需语境/事实核验，不擅定原意"
+  },
+  "evaluation": {
+    "pass_criteria": [
+      "expected_action一致",
+      "说明具体关系而非笼统标签",
+      "fix修复核心问题并保留事实",
+      "keep不把合法表达改成所谓正确句",
+      "review列出真实分歧且不凭空补事实",
+      "遵守must_preserve"
+    ],
+    "exact_string_match_required": false
+  },
+  "cases": [
+    {
+      "id": "G01",
+      "category": "词义",
+      "text": "老师并不赞同这一建议，因此表示不以为意。",
+      "expected_action": "fix",
+      "reason": "不赞同与不以为意的释义不符；语境锁定反对而非不在意。",
+      "context": "老师随后逐项说明反对理由，态度认真。",
+      "acceptable_revision": "老师并不赞同这一建议，因此表示不以为然。"
+    },
+    {
+      "id": "G02",
+      "category": "词义",
+      "text": "他虽然不赞同这一建议，却并不以为意。",
+      "expected_action": "keep",
+      "reason": "让步关系容许不同意却不放在心上，不能见不以为意就换然。",
+      "context": ""
+    },
+    {
+      "id": "G03",
+      "category": "对象敬谦",
+      "text": "感谢您为令爱辅导合唱，我们全家受益良多。",
+      "expected_action": "fix",
+      "reason": "语境明确辅导的是写信人的女儿，敬辞对象错误。",
+      "context": "家长给孩子的声乐教师写信。",
+      "acceptable_revision": "感谢您为我的女儿辅导合唱，我们全家受益良多。"
+    },
+    {
+      "id": "G04",
+      "category": "词性",
+      "text": "他把节俭下来的路费捐给了图书角。",
+      "expected_action": "fix",
+      "reason": "节俭不能在该处承担节省的结果动作。",
+      "context": "",
+      "acceptable_revision": "他把节省下来的路费捐给了图书角。"
+    },
+    {
+      "id": "G05",
+      "category": "术语边界",
+      "text": "学校更新了音乐教室的教学装备。",
+      "expected_action": "keep",
+      "reason": "没有证据表明术语使用错误，不能套装备只属军事的旧式限制。",
+      "context": ""
+    },
+    {
+      "id": "G06",
+      "category": "主语",
+      "text": "通过连续三轮试教，使教师找到了学生的困难。",
+      "expected_action": "fix",
+      "reason": "通过与使叠用使主干缺主语。",
+      "context": "",
+      "acceptable_revision": "通过连续三轮试教，教师找到了学生的困难。"
+    },
+    {
+      "id": "G07",
+      "category": "省略",
+      "text": "推开门，听见琴声，我才知道她已经来了。",
+      "expected_action": "keep",
+      "reason": "前两分句主语可蒙后还原为我。",
+      "context": ""
+    },
+    {
+      "id": "G08",
+      "category": "暗换主语",
+      "text": "学校表扬了小杜，并上台领取了奖金。",
+      "expected_action": "fix",
+      "reason": "领取者小杜不能由学校主语顺承，须显式换主语。",
+      "context": "小杜是获奖学生，颁奖记录明确他上台。",
+      "acceptable_revision": "学校表扬了小杜，小杜随后上台领取了奖金。"
+    },
+    {
+      "id": "G09",
+      "category": "宾语残缺",
+      "text": "教研室开始推广各组共同备课。",
+      "expected_action": "fix",
+      "reason": "当前语境推广的对象为一种做法，补全宾语中心更明确。",
+      "context": "介绍一项已经试行的备课制度。",
+      "acceptable_revision": "教研室开始推广各组共同备课的做法。"
+    },
+    {
+      "id": "G10",
+      "category": "宾语合法",
+      "text": "教研室鼓励各组共同备课。",
+      "expected_action": "keep",
+      "reason": "鼓励可带动作结构，不必补的做法。",
+      "context": ""
+    },
+    {
+      "id": "G11",
+      "category": "动宾搭配",
+      "text": "研修提升了教师的教学能力和课堂提问方式。",
+      "expected_action": "fix",
+      "reason": "提升不能同时支配方式，须配对表达。",
+      "context": "",
+      "acceptable_revision": "研修提升了教师的教学能力，改进了他们的课堂提问方式。"
+    },
+    {
+      "id": "G12",
+      "category": "主体类型",
+      "text": "两架钢琴和三位教师都放弃了午休。",
+      "expected_action": "fix",
+      "reason": "钢琴不能放弃午休。",
+      "context": "只需说明教师加班，不涉及拟人创作。",
+      "acceptable_revision": "三位教师都放弃了午休。",
+      "must_preserve": [
+        "如钢琴信息需保留，应另句说明，不能让钢琴承担休息动作。"
+      ]
+    },
+    {
+      "id": "G13",
+      "category": "两面反误报",
+      "text": "任务难度的高低会影响学生的完成速度。",
+      "expected_action": "keep",
+      "reason": "速度具有可变程度，与高低可对应。",
+      "context": ""
+    },
+    {
+      "id": "G14",
+      "category": "两面反误报",
+      "text": "是否进行第二轮访谈，取决于资料是否已经充分。",
+      "expected_action": "keep",
+      "reason": "两个选择变量清楚对应。",
+      "context": ""
+    },
+    {
+      "id": "G15",
+      "category": "两面确错",
+      "text": "能否按时完成排练，是演出顺利进行的可靠保证。",
+      "expected_action": "fix",
+      "reason": "未按时完成不能构成可靠保证。",
+      "context": "已有材料只说明排练对演出的促进作用，不足以担保结果。",
+      "acceptable_revision": "按时完成排练，有助于演出顺利进行。"
+    },
+    {
+      "id": "G16",
+      "category": "句式杂糅",
+      "text": "方案本着尊重学生选择为原则。",
+      "expected_action": "fix",
+      "reason": "本着的原则与以为原则混接。",
+      "context": "",
+      "acceptable_revision": "方案以尊重学生选择为原则。"
+    },
+    {
+      "id": "G17",
+      "category": "句式杂糅",
+      "text": "两组得分差异的原因是练习时间不同造成的。",
+      "expected_action": "fix",
+      "reason": "原因是与由造成两种句式混接。",
+      "context": "前文已有足以支持该因果关系的研究设计。",
+      "acceptable_revision": "两组得分差异是由练习时间不同造成的。"
+    },
+    {
+      "id": "G18",
+      "category": "前后牵连",
+      "text": "我们记录了学生提出的建议值得继续讨论。",
+      "expected_action": "fix",
+      "reason": "宾语建议无边界转为后续主语。",
+      "context": "",
+      "acceptable_revision": "我们记录了学生提出的建议。这些建议值得继续讨论。"
+    },
+    {
+      "id": "G19",
+      "category": "小句主语",
+      "text": "学生主动提出问题是课堂互动的重要表现。",
+      "expected_action": "keep",
+      "reason": "学生主动提出问题这一小句可以整体作主语。",
+      "context": ""
+    },
+    {
+      "id": "G20",
+      "category": "嵌套合法",
+      "text": "研究者认为学生提出的问题值得继续讨论。",
+      "expected_action": "keep",
+      "reason": "认为的宾语为完整判断，结构闭合。",
+      "context": ""
+    },
+    {
+      "id": "G21",
+      "category": "修饰范围",
+      "text": "档案室展出了八十年前新发现的乐谱。",
+      "expected_action": "review",
+      "reason": "不清楚八十年前修饰创作还是发现。",
+      "context": "没有提供乐谱创作、发现时间。",
+      "must_preserve": [
+        "不得自行添加创作或发现日期。"
+      ]
+    },
+    {
+      "id": "G22",
+      "category": "把字否定",
+      "text": "她把两份观察记录没有录入。",
+      "expected_action": "fix",
+      "reason": "常规正式叙述中否定应管辖把结构。",
+      "context": "",
+      "acceptable_revision": "她没有把两份观察记录录入。"
+    },
+    {
+      "id": "G23",
+      "category": "话题化",
+      "text": "这两份观察记录，她还没有录入。",
+      "expected_action": "keep",
+      "reason": "明确话题化合法，不等于把字语序错误。",
+      "context": ""
+    },
+    {
+      "id": "G24",
+      "category": "先后程序",
+      "text": "学生先提交作品，再开始创作，最后收到教师反馈。",
+      "expected_action": "fix",
+      "reason": "同一轮作业流程先后颠倒。",
+      "context": "描述一次从零开始的作业流程。",
+      "acceptable_revision": "学生先开始创作，再提交作品，最后收到教师反馈。"
+    },
+    {
+      "id": "G25",
+      "category": "叙述顺序",
+      "text": "下面先讨论课堂中出现的变化，再说明研究采用的观察方法。",
+      "expected_action": "keep",
+      "reason": "说明顺序可由写作目的安排。",
+      "context": ""
+    },
+    {
+      "id": "G26",
+      "category": "指代",
+      "text": "小林告诉小周，她明天去学校。",
+      "expected_action": "review",
+      "reason": "上下文没有确定她指哪名女性。",
+      "context": "小林和小周均为女性，无其他信息。",
+      "must_preserve": [
+        "须说明两种读法，不得擅定出行者。"
+      ]
+    },
+    {
+      "id": "G27",
+      "category": "指代语境",
+      "text": "陈老师独自负责节目单。她和助教商量了一会儿，随后继续修改。",
+      "expected_action": "keep",
+      "reason": "叙述主线和独自负责信息可将末句主语锁定陈老师。",
+      "context": ""
+    },
+    {
+      "id": "G28",
+      "category": "期限歧义",
+      "text": "请于十月六日前来领取材料。",
+      "expected_action": "review",
+      "reason": "六日这天前来与六日以前来存在实际期限差别。",
+      "context": "",
+      "must_preserve": [
+        "未获日期口径时不选择最迟或当天。"
+      ]
+    },
+    {
+      "id": "G29",
+      "category": "流转方向",
+      "text": "她借了同事一支录音笔。",
+      "expected_action": "review",
+      "reason": "没有足够语境确定借入或借出。",
+      "context": "",
+      "must_preserve": [
+        "核实录音笔所有者和交接方向。"
+      ]
+    },
+    {
+      "id": "G30",
+      "category": "理论歧义反误报",
+      "text": "老师把红色的文件夹放进抽屉。",
+      "expected_action": "keep",
+      "reason": "常规语境没有需要修复的实际歧义，不制造红色修饰老师之类读法。",
+      "context": ""
+    },
+    {
+      "id": "G31",
+      "category": "必要充分",
+      "text": "只有完成注册，就能参加选拔。",
+      "expected_action": "review",
+      "reason": "词对不合但真实规则不明，不能擅将必要条件改充分条件。",
+      "context": "",
+      "must_preserve": [
+        "说明只有才和只要就分别表达什么，待核是否另有资格条件。"
+      ]
+    },
+    {
+      "id": "G32",
+      "category": "转折省略",
+      "text": "虽然窗外下着雨，屋里的排练仍在继续。",
+      "expected_action": "keep",
+      "reason": "让步关系明确，不强制补但是。",
+      "context": ""
+    },
+    {
+      "id": "G33",
+      "category": "递进呼应",
+      "text": "不仅教师参加了评议，学生也提交了书面意见。",
+      "expected_action": "keep",
+      "reason": "也承担呼应，关联范围覆盖两个主语。",
+      "context": ""
+    },
+    {
+      "id": "G34",
+      "category": "关联错用",
+      "text": "她不但忘了带伴奏谱，而且演出并未受影响。",
+      "expected_action": "fix",
+      "reason": "当前语境表达意外的无碍，应为让步转折。",
+      "context": "",
+      "acceptable_revision": "她虽然忘了带伴奏谱，演出却并未受影响。"
+    },
+    {
+      "id": "G35",
+      "category": "目的原因",
+      "text": "他因为核实页码，特意去了图书馆。",
+      "expected_action": "fix",
+      "reason": "核实页码在语境中是尚待完成的行动目的。",
+      "context": "页码还没核实，他正准备查原书。",
+      "acceptable_revision": "他为了核实页码，特意去了图书馆。"
+    },
+    {
+      "id": "G36",
+      "category": "数值口径",
+      "text": "缺交率从20%降到10%，下降了10%。",
+      "expected_action": "fix",
+      "reason": "差值为10个百分点，相对降幅50%，需按口径表述。",
+      "context": "",
+      "acceptable_revision": "缺交率从20%降到10%，下降了10个百分点。"
+    },
+    {
+      "id": "G37",
+      "category": "均值反误报",
+      "text": "四个班的平均分均超过八十分。",
+      "expected_action": "keep",
+      "reason": "每班各有均值，均超过阈值合法。",
+      "context": ""
+    },
+    {
+      "id": "G38",
+      "category": "均值反误报",
+      "text": "样本的平均年龄超过三十岁。",
+      "expected_action": "keep",
+      "reason": "均值可以用不等式报告，不要求必须确数。",
+      "context": ""
+    },
+    {
+      "id": "G39",
+      "category": "计算与保真",
+      "text": "每轮观察二十分钟，共三轮，总时长四十分钟。",
+      "expected_action": "review",
+      "reason": "算术冲突确定，但不知哪项原始记录有误。",
+      "context": "",
+      "must_preserve": [
+        "指出20×3=60，不得悄悄把40改60当成核实事实。"
+      ]
+    },
+    {
+      "id": "G40",
+      "category": "否定",
+      "text": "为避免学生不再迟到，学校调整了集合时间。",
+      "expected_action": "fix",
+      "reason": "避免不再迟到反转了减少迟到的原意。",
+      "context": "",
+      "acceptable_revision": "为避免学生再次迟到，学校调整了集合时间。"
+    },
+    {
+      "id": "G41",
+      "category": "否定反误报",
+      "text": "不能不承认，这份报告仍有需要补充的地方。",
+      "expected_action": "keep",
+      "reason": "双重否定为必须承认，没有极性错误。",
+      "context": ""
+    },
+    {
+      "id": "G42",
+      "category": "差点儿反误报",
+      "text": "我差点儿没赶上车，还好司机多等了十秒。",
+      "expected_action": "keep",
+      "reason": "语境明确实际赶上，不数否定字判断。",
+      "context": ""
+    },
+    {
+      "id": "G43",
+      "category": "体貌反误报",
+      "text": "最后一段马上就要唱完了。",
+      "expected_action": "keep",
+      "reason": "了可标临界状态，不与将来意义天然矛盾。",
+      "context": ""
+    },
+    {
+      "id": "G44",
+      "category": "比较反误报",
+      "text": "去年的课程与今年的课程有明显差别。",
+      "expected_action": "keep",
+      "reason": "比较方向没有只能现在比过去的约束。",
+      "context": ""
+    },
+    {
+      "id": "G45",
+      "category": "因果证据",
+      "text": "两名受访者不喜欢即兴创作，证明所有学生都排斥这种活动。",
+      "expected_action": "fix",
+      "reason": "个别样本不能支持全称结论。",
+      "context": "",
+      "acceptable_revision": "两名受访者表示不喜欢即兴创作。",
+      "must_preserve": [
+        "不得扩大受访者人数或代表性。"
+      ]
+    },
+    {
+      "id": "G46",
+      "category": "修辞保留",
+      "text": "她把那句责问咽了回去，转身去收琴谱。",
+      "expected_action": "keep",
+      "reason": "可理解的惯常比喻，有意表达压下言语。",
+      "context": ""
+    },
+    {
+      "id": "G47",
+      "category": "复沓保留",
+      "text": "灯灭了。走廊静了，楼梯静了，连他的脚步也静了。",
+      "expected_action": "keep",
+      "reason": "文学复沓和拟人服务气氛，不按重复强删。",
+      "context": ""
+    },
+    {
+      "id": "G48",
+      "category": "人物口语",
+      "text": "“我、我不是这个意思。”他抓紧了谱夹。",
+      "expected_action": "keep",
+      "reason": "迟疑重复承担人物状态，不改成完整规范声明。",
+      "context": ""
+    },
+    {
+      "id": "G49",
+      "category": "同位并列",
+      "text": "林主任和副主任、陈老师一同出席。",
+      "expected_action": "fix",
+      "reason": "语境确认陈老师就是副主任，顿号制造多一人的误读。",
+      "context": "名单仅林主任、陈副主任两人。",
+      "acceptable_revision": "林主任和副主任陈老师一同出席。"
+    },
+    {
+      "id": "G50",
+      "category": "引用语气",
+      "text": "会议纪要写道，任务已经完成！",
+      "expected_action": "fix",
+      "reason": "客观纪要转述的外层不应无端用感叹语气。",
+      "context": "正式报告，原纪要句末为句号，要求忠实转述。",
+      "acceptable_revision": "会议纪要写道，任务已经完成。"
+    },
+    {
+      "id": "G51",
+      "category": "保留引语",
+      "text": "她说：“终于轮到我们了！”",
+      "expected_action": "keep",
+      "reason": "感叹属于人物引语，标点位置合理。",
+      "context": ""
+    },
+    {
+      "id": "G52",
+      "category": "篇章全文覆盖",
+      "text": "甲段：通过试教，使教师了解了困难。乙段：经过讨论，使我们明确了目标。",
+      "expected_action": "fix",
+      "reason": "同类主语残缺出现两次，必须都改。",
+      "context": "",
+      "acceptable_revision": "甲段：通过试教，教师了解了困难。乙段：经过讨论，我们明确了目标。",
+      "must_preserve": [
+        "不能只改甲段并声称全文完成。"
+      ]
+    },
+    {
+      "id": "G53",
+      "category": "不误改代词",
+      "text": "老师对大家说：“我们先读题，再动笔。”",
+      "expected_action": "keep",
+      "reason": "教师采用包含听话人的我们来指导活动，合法。",
+      "context": ""
+    },
+    {
+      "id": "G54",
+      "category": "人数人次",
+      "text": "本周累计派出志愿者三十人次，其中小姚参加了两次。",
+      "expected_action": "keep",
+      "reason": "累计派遣以人次计数明确，不能因派字自动判错。",
+      "context": ""
+    },
+    {
+      "id": "G55",
+      "category": "量化比较",
+      "text": "合订本原价六百元，现价二百元，便宜了约三分之二。",
+      "expected_action": "keep",
+      "reason": "相对下降400/600=2/3，数值正确。",
+      "context": ""
+    }
+  ]
+}

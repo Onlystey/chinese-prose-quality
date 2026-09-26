@@ -1,0 +1,824 @@
+{
+  "schema_version": "1.0",
+  "purpose": "原创中文标点与数字语义评测；仅数据，不代表已由模型跑过",
+  "source_policy": "全部测试自拟，不复制原书题库；材料中的引文与作品名除技术记号外均为虚构测试样例",
+  "scoring": {
+    "error": "必须指出实质错误并给不改原意的修订；接受等义替代",
+    "acceptable": "不得错误标红或强改允许用法",
+    "context_dependent": "应说明所缺语境或体例，不当作确定错误",
+    "common_failures": [
+      "以正则全局替换代替语义判断",
+      "改动引文事实、数值或技术字符串",
+      "将允许形式错误判为病句",
+      "只修例句而漏掉同段同类问题"
+    ]
+  },
+  "cases": [
+    {
+      "id": "punct-001",
+      "input": "本文讨论教师为何改变评分标准？",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P04"
+      ],
+      "reason": "是陈述研究内容，不是直接发问。",
+      "must_preserve": [],
+      "acceptable_revision": "本文讨论教师为何改变评分标准。"
+    },
+    {
+      "id": "punct-002",
+      "input": "本节要回答的问题是：教师为何改变评分标准？",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P04",
+        "P21"
+      ],
+      "reason": "提示后直接提出问题，问号合理。",
+      "must_preserve": [
+        "保留直接疑问"
+      ]
+    },
+    {
+      "id": "punct-003",
+      "input": "你今天提交还是明天提交？",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P05"
+      ],
+      "reason": "短选择项可无逗号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-004",
+      "input": "是门没有锁好？还是有人另配了一把钥匙？",
+      "context": "悬疑小说中人物反复猜想两种可能",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P05"
+      ],
+      "reason": "叙事者逐项追问，突出独立疑虑可各用问号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-005",
+      "input": "你把录音放在哪里了？小许。",
+      "context": "同一句问话；小许是被问者，不是回答",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P07"
+      ],
+      "reason": "末尾姓名是后置称呼，原点号错误割裂同句。",
+      "must_preserve": [],
+      "acceptable_revision": "你把录音放在哪里了，小许？"
+    },
+    {
+      "id": "punct-006",
+      "input": "阿禾？你怎么站在门外？",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P07"
+      ],
+      "reason": "第一句为惊讶确认人物的独立呼名，非后置称呼。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-007",
+      "input": "请把修订稿留在桌上。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P03"
+      ],
+      "reason": "平和祈使可以句号，不强改叹号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-008",
+      "input": "找到了！我们终于找到了！",
+      "context": "小说中失散人员获救后的喊话",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P03"
+      ],
+      "reason": "表达强烈喜悦的陈述形式可叹号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-009",
+      "input": "你居然把原件烧掉了？！",
+      "context": "小说对白",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P06",
+        "P08"
+      ],
+      "reason": "有强烈惊愕和疑问，可问叹连用。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-010",
+      "input": "本研究共有三个问题？？？？",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P08"
+      ],
+      "reason": "普通学术陈述不合疑问语气，四叠也超常规允许上限。",
+      "must_preserve": [],
+      "acceptable_revision": "本研究共有三个问题。"
+    },
+    {
+      "id": "punct-011",
+      "input": "夜里。渡口旁的一间茶铺。",
+      "context": "小说新场景起首；后文承接茶铺内的行动",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P01"
+      ],
+      "reason": "场景建立中的独词句可成立。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-012",
+      "input": "由于第三份录音仍未转写完成。我们暂不合并编码结果。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P01",
+        "P02"
+      ],
+      "reason": "原因状语未独立完成，不应句号割断。",
+      "must_preserve": [],
+      "acceptable_revision": "由于第三份录音仍未转写完成，我们暂不合并编码结果。"
+    },
+    {
+      "id": "punct-013",
+      "input": "她提起水壶，移开杯子，把药放到桌边。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P02"
+      ],
+      "reason": "连贯紧密行动可逗号串接，不按数量强断句。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-014",
+      "input": "我们把，访谈记录分成了三个部分。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P10"
+      ],
+      "reason": "把与宾语及谓语紧连。",
+      "must_preserve": [],
+      "acceptable_revision": "我们把访谈记录分成了三个部分。"
+    },
+    {
+      "id": "punct-015",
+      "input": "评委听取了速度、力度、音色和句法的说明。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P12",
+        "P13"
+      ],
+      "reason": "并列词语顿号、末项连词配合正常。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-016",
+      "input": "教师、和学生一起整理了器材。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P13"
+      ],
+      "reason": "同一连接位置顿号与和叠用。",
+      "must_preserve": [],
+      "acceptable_revision": "教师和学生一起整理了器材。"
+    },
+    {
+      "id": "punct-017",
+      "input": "两位参与者都是江城市、松林区的教师。",
+      "context": "任务材料已确认松林区属于江城市",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P12"
+      ],
+      "reason": "已知松林区属于江城市，原文误标并列。",
+      "must_preserve": [],
+      "acceptable_revision": "两位参与者都是江城市松林区的教师。"
+    },
+    {
+      "id": "punct-018",
+      "input": "她在门口等了两、三分钟。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P15"
+      ],
+      "reason": "这里是约两三分钟的概数。",
+      "must_preserve": [],
+      "acceptable_revision": "她在门口等了两三分钟。"
+    },
+    {
+      "id": "punct-019",
+      "input": "第二、三组明天补录。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P15"
+      ],
+      "reason": "确指第二组与第三组，不改成二三组概数。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-020",
+      "input": "课程讨论了《听见山谷》《窗边的琴声》。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P16"
+      ],
+      "reason": "相邻书名号可不用顿号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-021",
+      "input": "两版教材为《听见山谷》（试用本）《窗边的琴声》（修订本）。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P16"
+      ],
+      "reason": "并列书名号间有括注，宜顿号显示边界。",
+      "must_preserve": [],
+      "acceptable_revision": "两版教材为《听见山谷》（试用本）、《窗边的琴声》（修订本）。"
+    },
+    {
+      "id": "punct-022",
+      "input": "任务分两部分，甲组核对题名，补齐版本；乙组整理录音，核准日期。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P19"
+      ],
+      "reason": "第一层统领不应逗号套第二层分号。",
+      "must_preserve": [],
+      "acceptable_revision": "任务分两部分：甲组核对题名，补齐版本；乙组整理录音，核准日期。"
+    },
+    {
+      "id": "punct-023",
+      "input": "甲组核对题名，补齐版本；乙组整理录音，核准日期。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P14",
+        "P18"
+      ],
+      "reason": "两个并列分句各含逗号，分号清楚。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-024",
+      "input": "他已经同意；不过，我还想听听她的意见。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P18"
+      ],
+      "reason": "分号前无需已有逗号，首层转折可成立。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-025",
+      "input": "计划有两项：一是补充资料。现有资料少了两页；二是核对人名。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P20"
+      ],
+      "reason": "第一列项内部已有句号，项末不应分号。",
+      "must_preserve": [],
+      "acceptable_revision": "计划有两项：一是补充资料。现有资料少了两页。二是核对人名。"
+    },
+    {
+      "id": "punct-026",
+      "input": "访谈围绕两个方面：学习经历和评价习惯，周五再核对转写。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P22"
+      ],
+      "reason": "后段安排不属于两个方面的范围，应结束提示范围。",
+      "must_preserve": [],
+      "acceptable_revision": "访谈围绕两个方面：学习经历和评价习惯。周五再核对转写。"
+    },
+    {
+      "id": "punct-027",
+      "input": "集合时间：周六上午；集合地点：图书馆门口。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P23"
+      ],
+      "reason": "并行标签式说明冒号，并非嵌套；不采作者过严禁令。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-028",
+      "input": "她轻轻说了声：“好”，便收起笔。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P21"
+      ],
+      "reason": "说了声与其内容紧连，无必要冒号。",
+      "must_preserve": [],
+      "acceptable_revision": "她轻轻说了声“好”，便收起笔。"
+    },
+    {
+      "id": "punct-029",
+      "input": "调查表明，参与者普遍重视同伴反馈。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P24"
+      ],
+      "reason": "一般停顿可逗号，不强改冒号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-030",
+      "input": "“先别关门，”她说：“我还要搬一箱书。”",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P25"
+      ],
+      "reason": "插在同一人连续话语中，提示语后应逗号。",
+      "must_preserve": [],
+      "acceptable_revision": "“先别关门，”她说，“我还要搬一箱书。”"
+    },
+    {
+      "id": "punct-031",
+      "input": "她说：“先把原件留好。”",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P25",
+        "P27"
+      ],
+      "reason": "完整独立引语，末号在内。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-032",
+      "input": "作者把这一步称作“二次核对。”",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P27"
+      ],
+      "reason": "引用片段是句子成分，句号应外置。",
+      "must_preserve": [],
+      "acceptable_revision": "作者把这一步称作“二次核对”。"
+    },
+    {
+      "id": "punct-033",
+      "input": "门后传来一声“谁在外面？”的询问。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P27"
+      ],
+      "reason": "嵌入直接问句可保留问号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-034",
+      "input": "她说：“老师把“重复聆听”写在了黑板上。”",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P28"
+      ],
+      "reason": "嵌套引号外双内单。",
+      "must_preserve": [],
+      "acceptable_revision": "她说：“老师把‘重复聆听’写在了黑板上。”"
+    },
+    {
+      "id": "punct-035",
+      "input": "教师说，这次作业需要增加比较材料。",
+      "context": "材料只记录讲话大意，没有逐字录音；禁止改成精确引文",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P26"
+      ],
+      "reason": "转述大意，不加引号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-036",
+      "input": "十分钟后（这十分钟真漫长！）门终于打开了。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "context_dependent",
+      "rule_ids": [
+        "P32"
+      ],
+      "reason": "若外层需在后置状语后停顿，可于右括号后逗号；内部叹号不决定外层。",
+      "must_preserve": [],
+      "acceptable_revision": "十分钟后（这十分钟真漫长！），门终于打开了。"
+    },
+    {
+      "id": "punct-037",
+      "input": "两组参与者（每组6人。）分别完成了任务。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P32"
+      ],
+      "reason": "句内简短括注末不应句号。",
+      "must_preserve": [],
+      "acceptable_revision": "两组参与者（每组6人）分别完成了任务。"
+    },
+    {
+      "id": "punct-038",
+      "input": "请读桌上的那封信——昨晚送来的那封——再作决定。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P35"
+      ],
+      "reason": "成对破折号标明中间说明边界。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-039",
+      "input": "“他刚才明明还在——”她忽然停住，转身看向楼梯。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P37",
+        "P41"
+      ],
+      "reason": "破折号可标骤然中断，后面有行动依据。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-040",
+      "input": "“我……还没准备好。”他把手缩了回去。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P40",
+        "P41"
+      ],
+      "reason": "省略号表示迟疑断续，与动作一致。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-041",
+      "input": "器材包括话筒、支架、耳机……等物品。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P42"
+      ],
+      "reason": "列举未尽的省略号与等重复。",
+      "must_preserve": [],
+      "acceptable_revision": "器材包括话筒、支架、耳机等物品。"
+    },
+    {
+      "id": "punct-042",
+      "input": "如果……，就……。",
+      "context": "教材用于说明关联词结构",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P43"
+      ],
+      "reason": "特定格式成分虚缺，省略号后可必要点号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-043",
+      "input": "“什么——？”他像是没有听清。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P38"
+      ],
+      "reason": "破折号表示语音停顿，后可问号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-044",
+      "input": "下周将开设《课堂观察方法》课程。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P30",
+        "P45"
+      ],
+      "reason": "课程名不是既成作品题名。",
+      "must_preserve": [],
+      "acceptable_revision": "下周将开设“课堂观察方法”课程。"
+    },
+    {
+      "id": "punct-045",
+      "input": "她读完了《课堂观察方法》，在扉页写下三个问题。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P45"
+      ],
+      "reason": "此处明确指书，书名号合适。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-046",
+      "input": "请以《窗外的声音》为题写一篇短文。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P30"
+      ],
+      "reason": "这里只给作文题目，不指已成作品。",
+      "must_preserve": [],
+      "acceptable_revision": "请以“窗外的声音”为题写一篇短文。"
+    },
+    {
+      "id": "punct-047",
+      "input": "《论〈窗外的声音〉的叙述节奏》",
+      "context": "在正文中提及一篇已发表文章的真实题名，本测试题名虚构",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P47"
+      ],
+      "reason": "外双内单书名号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-048",
+      "input": "《晨课（修订版）》的第25页说明了流程。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "context_dependent",
+      "rule_ids": [
+        "P46"
+      ],
+      "reason": "需查修订版是否正式题名组成；通常版本说明在书名号外。",
+      "must_preserve": [],
+      "acceptable_revision": "《晨课》（修订版）的第25页说明了流程。"
+    },
+    {
+      "id": "punct-049",
+      "input": "（一）、材料来源",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P54"
+      ],
+      "reason": "带括号序号后不再顿号。",
+      "must_preserve": [],
+      "acceptable_revision": "（一）材料来源"
+    },
+    {
+      "id": "punct-050",
+      "input": "2.1. 访谈设计",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P54"
+      ],
+      "reason": "章节复合序次末无额外点。",
+      "must_preserve": [],
+      "acceptable_revision": "2.1 访谈设计"
+    },
+    {
+      "id": "punct-051",
+      "input": "学生为何沉默？",
+      "context": "论文章节标题",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P55"
+      ],
+      "reason": "疑问标题可问号。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-052",
+      "input": "阅读第18—23页。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P49",
+        "D03"
+      ],
+      "reason": "数值范围可用一字线，不能强制浪纹线。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-053",
+      "input": "比例由12～18%不等。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "D03"
+      ],
+      "reason": "百分比范围左端不能漏百分号；同时由与不等搭配别扭。",
+      "must_preserve": [],
+      "acceptable_revision": "比例为12%～18%。"
+    },
+    {
+      "id": "punct-054",
+      "input": "预算为8～12万元。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "D03"
+      ],
+      "reason": "金额左端量级应明确；采用保守规范避免歧义。",
+      "must_preserve": [],
+      "acceptable_revision": "预算为8万元～12万元。"
+    },
+    {
+      "id": "punct-055",
+      "input": "线段长30～40厘米。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "D03"
+      ],
+      "reason": "前项同单位省略无歧义。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-056",
+      "input": "相关系数为.42。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "D05"
+      ],
+      "reason": "普通纯小数需前置0。",
+      "must_preserve": [],
+      "acceptable_revision": "相关系数为0.42。"
+    },
+    {
+      "id": "punct-057",
+      "input": "保存时间为09:30，文件名为take_03.wav。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "D06",
+        "D08"
+      ],
+      "reason": "时间及文件名保护，不普通中文全角化。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-058",
+      "input": "访谈安排在2026-9。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "D06"
+      ],
+      "reason": "中文正文不完整年月不以该完整日期短横格式替代。",
+      "must_preserve": [],
+      "acceptable_revision": "访谈安排在2026年9月。"
+    },
+    {
+      "id": "punct-059",
+      "input": "她在那儿住了七八年。",
+      "context": "小说人物回忆居住时长",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "D01",
+        "P15"
+      ],
+      "reason": "文艺概数自然，不能改成1978年或七、八年。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-060",
+      "input": "二零二六年",
+      "context": "正式中文纪年而非逐字口语转写",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "D07"
+      ],
+      "reason": "逐位书写年份用〇。",
+      "must_preserve": [],
+      "acceptable_revision": "二〇二六年"
+    },
+    {
+      "id": "punct-061",
+      "input": "作品编号为Op. 27，拍号为3/4，文件位于audio/raw/take01.wav。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "D08",
+        "P52"
+      ],
+      "reason": "专业记号、拍号、路径保护。",
+      "must_preserve": [
+        "Op. 27",
+        "3/4",
+        "audio/raw/take01.wav"
+      ]
+    },
+    {
+      "id": "punct-062",
+      "input": "研究考察了任务目标的明确程度、反馈建议的可操作性，及教师据此调整下一课安排的方式。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "context_dependent",
+      "rule_ids": [
+        "P13",
+        "P14"
+      ],
+      "reason": "长复杂并列及前逗号不能被一刀切禁用；还需审查三项语法层级一致。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-063",
+      "input": "她问：“你说的‘留白’，是这一小节的休止吗？”",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P28",
+        "D08"
+      ],
+      "reason": "套引正确，音乐休止术语保留，不改为一般留空。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-064",
+      "input": "访谈有两部分，第一部分回顾学习经历。请参与者说明何时开始练琴；第二部分询问评价标准，研究者不评价答案对错。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P19",
+        "P20",
+        "P02"
+      ],
+      "reason": "总分、项内句号与项末分号混乱；应整理整体结构，不只改一个点号。",
+      "must_preserve": [],
+      "acceptable_revision": "访谈有两部分。第一部分回顾学习经历，请参与者说明何时开始练琴。第二部分询问评价标准，研究者不评价答案对错。"
+    },
+    {
+      "id": "punct-065",
+      "input": "原话是“没有任何学生不愿意参加”。修订稿写为“没有任何学生愿意参加”。",
+      "context": "用户要求核查引文一致性；给出的原话已逐字核验",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "P26"
+      ],
+      "reason": "引用改动删掉否定，意义反转；属于引文保真问题，不能以更顺口辩解。",
+      "must_preserve": [
+        "原始双重否定意义"
+      ]
+    },
+    {
+      "id": "punct-066",
+      "input": "“我不知道，”她把杯子放下，“你去问门卫。”",
+      "context": "普通叙事体例，人物连续对白；允许作者另有明确自由体例",
+      "expected_verdict": "context_dependent",
+      "rule_ids": [
+        "P25",
+        "P02"
+      ],
+      "reason": "中间是动作而非说话提示语，需按独立动作或叙述结构审读；不盲套某某说规则。",
+      "must_preserve": [],
+      "acceptable_revision": "“我不知道。”她把杯子放下。“你去问门卫。”"
+    },
+    {
+      "id": "punct-067",
+      "input": "来源包括第一版、第二版，以及编辑部保存的未刊校样。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "acceptable",
+      "rule_ids": [
+        "P14"
+      ],
+      "reason": "末项较长，复杂并列以及前逗号允许。",
+      "must_preserve": []
+    },
+    {
+      "id": "punct-068",
+      "input": "按照材料，二〇二六年9月26日完成了复核。",
+      "context": "现代汉语正文；引用与专名均为虚构原创示例",
+      "expected_verdict": "error",
+      "rule_ids": [
+        "D02"
+      ],
+      "reason": "同一日期汉字与阿拉伯无理由混用。",
+      "must_preserve": [],
+      "acceptable_revision": "按照材料，2026年9月26日完成了复核。"
+    }
+  ]
+}
