@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "files": {
+    ".gitignore": "d1f71805cdfd4372f0a84ead34968d389d28fdf911fdcd7318eb6cc226141149",
+    "CONTRIBUTING.md": "fa961ef952bf6e0dae2368ced7c459c5eb61fa1c1a1f29bb38056964b0ac5cba",
+    "LICENSE": "def5593c66d442c8302f6d24d0d1a6b286ee9a77c5519ac1c35ba38355c42e8c",
+    "README.md": "d6d9c2a83144770356e0b1c881ca4e26812cb0a276ed25e48aa67ee885f1eb78",
+    "evals/README.md": "42d4cc8819833881168cb415bd010f92e475f2f760ef40704cd105f64979bcd8",
+    "evals/adjudication-2026-09-26.md": "1cf02defbfed783579604cb1b7a81589dc05d56c2ba3b9ce67fbf11f3cf274d7",
+    "evals/exam-transfer.json": "e6ecfdae5dea2089fe684dc1b16d81973cc7be62cb480df83a991202e97736ef",
+    "evals/grammar.json": "3bb7457f3b09e6d250d344a8f4a983af7e0e508dd522b9ede6024b137069b4b7",
+    "evals/punctuation.json": "67a8f074b21d9a4384ab1d2ed6e82b7d53af4bc528787334c0cc85d361943a03",
+    "evals/results-2026-09-26/exam-transfer-observed.json": "cdb46dec87ee6f811ebc440a978ea4473a701dbef24e78867697e8d50fc713f5",
+    "evals/results-2026-09-26/final-regression.md": "b12d743a049d91ef6800ed77d236b814e3c077790547da11b0e85f698b826017",
+    "evals/results-2026-09-26/grammar-observed.json": "3823d3f392ab9cd38243d028bb5a3e05267f6a599a9faf3863b79e95f0ca4a14",
+    "evals/results-2026-09-26/punctuation-observed.json": "f4d9ab2f5e7ad0bf934f72fb719a4d61169115415f91c92f2f088f02f4163a72",
+    "skills/chinese-prose-quality/SKILL.md": "8629cf9f5c70ae5c02e33e24a6dccd6db2a4e76737f1269f514f69c27423fd10",
+    "skills/chinese-prose-quality/agents/openai.yaml": "f0b14552677114fc02343923e8d1600eeaa299f9dbb0141a4fb62ddfb99d33ed",
+    "skills/chinese-prose-quality/references/academic.md": "d8c4d6a2cc85ffc5655bd004ab3e8a59edba22d3684ac746f519d9f3aff904f2",
+    "skills/chinese-prose-quality/references/edge-cases.md": "b3b9e13a49dd2a6d916bbda0568574a3951b7d6c42b2cb13f69ecc79452dfa0c",
+    "skills/chinese-prose-quality/references/fiction.md": "ead8b9e807c2899f4a5a1622f2763f5cca3cdf59f0f1b1114261e4c8d597cb74",
+    "skills/chinese-prose-quality/references/grammar.md": "2c81fe3ad5ea702799a1663f570afdd0faf88e3872c53394464802503ce80655",
+    "skills/chinese-prose-quality/references/methods.md": "a6460e5461fb9491e7acfc3807c1949760cffd8b2ba6151e01289fae408061a1",
+    "skills/chinese-prose-quality/references/punctuation.md": "b2d5a1da57d597cb452ef8ba3d9a8f02a5953436affff234a3e9bf1264c42c34",
+    "skills/chinese-prose-quality/references/revision.md": "2f2f5173e64efbfa5b5d31358d02cb2dce4a2ea5537d9aa5cd368abc79c1a5e5",
+    "skills/chinese-prose-quality/references/source-notes.md": "c66b22f8801a75e92ccb844f2b187eb24e412e1b6a253223d3896a8148de66ca",
+    "skills/chinese-prose-quality/references/textbook.md": "4c1feba6c00b9289a6bd420f1863a2ff96a14c129214e03959170300be8db617",
+    "skills/chinese-prose-quality/scripts/text_audit.py": "a65a7c283d91f1a1f439e5aa0b828bf3c9c1ce7c72b7181150ba1899bcff6c9e",
+    "tests/test_install.py": "d1bdb377f190d4b6aa2c39dc21caa9153575690d2da17672b3e900f8c2151d14",
+    "tests/test_text_audit.py": "e4ff32d5899793d531dba0870635531cf3c38c346753bf12e2627e5a2d0f6387",
+    "tools/install.py": "05046ca968cb9abd433aaea5cc08adba0f4db35e1c03093ec3486491c4624769"
+  }
+}
